@@ -4,14 +4,17 @@ import java.util.Random;
 public class base {
     
     public static void main(String[] args) {
-        int bitstringSize = 8; // length 𝑛
+        int bitstringSize = 10; // length 𝑛
         final int populationSize = 100;
+        int mutationRate = 15;
         String[] population = createPopulation(bitstringSize, populationSize);
 
-        /*for (int x = 0; x < 100; x++) {
-            System.out.println(population[x]);
-            //getScore(population[x]);
-        }*/
+
+        for (int x = 0; x < 100; x++) {
+            getScore(population[x]);
+            population[x] = mutation(mutationRate, bitstringSize, population[x]);
+            //System.out.println(population[x]);
+        }
 
         String[] newPopulation = crossover(population, populationSize, bitstringSize);
 
@@ -72,6 +75,25 @@ public class base {
 
         }
         return newPopulation;
+    }
+
+    public static String mutation(int mutationRate, int bitstringSize, String bitstring) {
+        Random random = new Random();
+        StringBuilder newBitstring = new StringBuilder(bitstring);
+
+        for (int i = 0; i < bitstringSize; i++) {
+            int probability = random.nextInt(0, 100);
+            if (probability <= mutationRate) {
+                if (bitstring.charAt(i) == '1') {
+                    newBitstring.setCharAt(i, '0');
+                }
+                else {
+                    newBitstring.setCharAt(i, '1');
+                }
+            }
+        }
+        String finalBitstring = newBitstring.toString();
+        return finalBitstring;
     }
 }
 
