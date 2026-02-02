@@ -1,10 +1,18 @@
 import java.util.Random;
-
+import java.util.Scanner;
 
 public class base {
     
     public static void main(String[] args) {
-        int bitstringSize = 10; // length 𝑛
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter solution length: ");
+        int bitstringSize = scanner.nextInt(); // length 𝑛
+        while ((bitstringSize % 2) != 0) {
+            System.out.println("Solution length must be even: ");
+            bitstringSize = scanner.nextInt();
+        }
+
         final int populationSize = 100;
         int mutationRate = 15;
         String[] population = createPopulation(bitstringSize, populationSize);
