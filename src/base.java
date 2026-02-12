@@ -13,7 +13,12 @@ public class base {
 
         //task eight
         /*System.out.println("Enter solution length: ");
-        int bitstringSize = scanner.nextInt(); // length 𝑛
+        String tryInput = scanner.nextLine(); // length 𝑛
+        while (!(isDigit(tryInput)) || isZero(tryInput)) {
+            System.out.println("Solution length must be an even number");
+            tryInput = scanner.nextLine();
+        }
+        int bitstringSize = Integer.parseInt(tryInput);
         while ((bitstringSize % 2) != 0) {
             System.out.println("Solution length must be even: ");
             bitstringSize = scanner.nextInt();
@@ -75,6 +80,7 @@ public class base {
             System.out.println("time: " + averageTime[x4]);
         }
 
+
         //task seven
         /*final int populationSize = 100;
         int mutationRate = 15;
@@ -105,10 +111,14 @@ public class base {
             System.out.println(population[x3]);
         }
 
-        System.out.println("algorithm took " + generations + " generations");
-        */
+        System.out.println("algorithm took " + generations + " generations");*/
 
-        /*task five
+
+        //task five
+        /*final int populationSize = 100;
+        int mutationRate = 15;
+        String[] population = createPopulation(bitstringSize, populationSize);
+
         for (int x = 0; x < populationSize; x++) {
             score(population[x]);
             population[x] = mutation(mutationRate, bitstringSize, population[x]);
@@ -118,7 +128,7 @@ public class base {
 
         //task six
         for (int x2 = 0; x2 < populationSize; x2++) {
-            if (evaluate(population, newPopulation, populationSize)) {
+            if (evaluate(population[x2], newPopulation[x2], populationSize)) {
                 population[x2] = newPopulation[x2];
             }
         }*/
@@ -221,6 +231,37 @@ public class base {
         }
         if (fullPerfectCheck == populationSize) {
             return true;
+        }
+        return false;
+    }
+
+    public static boolean isDigit(String string) {
+        if (string == null || string.isEmpty()) {
+            return false;
+        }
+        for (char c : string.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isZero(String string) {
+        int count = 0;
+        if (string == null || string.isEmpty()) {
+            return true;
+        }
+        if (string.equals("0")) {
+            return true;
+        }
+        for (int i = 0; i < string.length() - 1; i++) {
+            if (string.charAt(i) == '0'){
+                count++;
+            }
+        }
+        if (count == string.length()) {
+            return false;
         }
         return false;
     }
